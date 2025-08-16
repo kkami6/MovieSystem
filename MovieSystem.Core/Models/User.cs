@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Core.Models
 {
-    public class User(int userId, string firstName, string lastName, string email, DateTime dateOfBirth)
+    public class User(int id, string firstName, string lastName, string email, DateTime dateOfBirth)
     {
-        public int UserId { get; set; } = userId;
+        public int Id { get; set; } = id;
 
         public string FirstName { get; set; } = firstName;
 
@@ -17,5 +17,12 @@ namespace MovieSystem.Core.Models
         public string Email { get; set; } = email;
 
         public DateTime DateOfBirth { get; set; } = dateOfBirth;
+
+        public List<Rating> Ratings { get; set; } = new List<Rating>();
+
+        public List<Movie> RatedMovies => Ratings
+            .Where(r => r.Movie is not null)
+            .Select(r => r.Movie!)
+            .ToList();
     }
 }

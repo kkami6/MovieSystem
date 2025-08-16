@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Infrastructure.Entities
 {
-    public class User (int userId, string firstName, string lastName, string email, DateTime dateOfBirth)
+    public class UserEntity (int id, string firstName, string lastName, string email, DateTime dateOfBirth)
     {
-        public int UserId { get; set; } = userId;
-
+        public int Id { get; set; } = id;
         public string FirstName { get; set; } = firstName;
-
         public string LastName { get; set; } = lastName;
-
         public string Email { get; set; } = email;
-
         public DateTime DateOfBirth { get; set; } = dateOfBirth;
 
-        public List<Rating> Ratings { get; set; } = new List<Rating>();
+        public List<RatingEntity> Ratings { get; set; } = new List<RatingEntity>();
     }
 }

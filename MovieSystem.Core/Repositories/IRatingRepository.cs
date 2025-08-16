@@ -10,17 +10,17 @@ namespace MovieSystem.Core.Repositories
     internal interface IRatingRepository
     {
         Task<Rating> Create(Rating model);
-        
-        Task<Rating> Get(int id);
-        
+
+        Task<Rating?> Get(int id);
+
         Task<List<Rating>> GetAll();
-        
+
         Task<Rating> Update(Rating model);
-        
+
         Task Delete(int id);
 
-        Task<List<Rating>> GetRatingsForMovie(int movieId);
+        Task<List<Rating>> GetByUser(int userId);
 
-        Task<List<Rating>> GetRatingsByUser(int userId);
+        Task<List<Rating>> GetByMovie(int movieId);
     }
 }

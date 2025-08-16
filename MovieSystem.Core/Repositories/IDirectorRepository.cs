@@ -11,12 +11,12 @@ namespace MovieSystem.Core.Repositories
     {
         Task<Director> Create(Director model);
 
-        Task<Director> Get(int id);
-        
+        Task<Director?> Get(int id);
+
         Task<List<Director>> GetAll();
-        
+
         Task<Director> Update(Director model);
-        
+
         Task Delete(int id);
     }
 }

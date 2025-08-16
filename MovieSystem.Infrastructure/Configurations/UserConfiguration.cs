@@ -10,28 +10,17 @@ using MovieSystem.Infrastructure.Entities;
 
 namespace MovieSystem.Infrastructure.Configurations
 {
-    public class UserConfiguration : IEntityTypeConfiguration<User>
+    public class UserConfiguration : IEntityTypeConfiguration<UserEntity>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<UserEntity> builder)
         {
-            builder.ToTable(nameof(User));
-
-            builder.HasKey(x => x.UserId);
-
-            builder.Property(x => x.UserId)
-                .ValueGeneratedOnAdd();
-
-            builder.Property(x => x.FirstName)
-                .IsRequired();
-
-            builder.Property(x => x.LastName)
-                .IsRequired();
-
-            builder.Property(x => x.Email)
-                .IsRequired();
-
-            builder.Property(x => x.DateOfBirth)
-                .IsRequired();
+            builder.ToTable("Users");
+            builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).ValueGeneratedOnAdd();
+            builder.Property(x => x.FirstName).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.LastName).IsRequired().HasMaxLength(50);
+            builder.Property(x => x.Email).IsRequired().HasMaxLength(100);
+            builder.Property(x => x.DateOfBirth).IsRequired();
         }
     }
 }

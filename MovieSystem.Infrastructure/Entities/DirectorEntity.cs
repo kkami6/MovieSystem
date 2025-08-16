@@ -1,21 +1,20 @@
-﻿using System;
+﻿using MovieSystem.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace MovieSystem.Core.Models
+namespace MovieSystem.Infrastructure.Entities
 {
-    public class Director(int id, string name, DateOnly? birthDate, string? nationality)
+    public class DirectorEntity(int id, string name, DateOnly? birthDate, string? nationality)
     {
         public int Id { get; set; } = id;
-
         public string Name { get; set; } = name;
-
         public DateOnly? BirthDate { get; set; } = birthDate;
-
         public string? Nationality { get; set; } = nationality;
 
-        public List<Movie> Movies { get; set; } = new List<Movie>();
+        public List<MovieEntity> Movies { get; set; } = new List<MovieEntity>();
     }
 }

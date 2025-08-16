@@ -11,16 +11,19 @@ namespace MovieSystem.Core.Repositories
     {
         Task<Movie> Create(Movie model);
 
-        Task<Movie> Get(int id);
+        Task<Movie?> Get(int id);
 
         Task<List<Movie>> GetAll();
-        
+
         Task<Movie> Update(Movie model);
-        
+
         Task Delete(int id);
 
-        Task<List<(Movie Movie, double AvgRating)>> GetMoviesByDirectorWithAvgRating(int directorId);
+        // Complex queries
+        Task<List<MovieRatingDetails>> GetRatedByUser(int userId);
 
-        Task<List<(Movie Movie, double AvgRating)>> GetTopRatedMovies(int topN);
+        Task<List<MovieWithAverageRating>> GetByDirectorWithAverageRating(int directorId);
+
+        Task<List<MovieWithAverageRating>> GetTopRated(int top);
     }
 }

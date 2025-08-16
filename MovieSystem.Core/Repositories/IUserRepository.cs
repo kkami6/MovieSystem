@@ -10,15 +10,13 @@ namespace MovieSystem.Core.Repositories
     public interface IUserRepository
     {
         Task<User> Create(User model);
-        
-        Task<User> Get(int id);
-        
-        Task<List<User>> GetAll();
-        
-        Task<User> Update(User model);
-        
-        Task Delete(int id);
 
-        Task<List<Movie>> GetMoviesRatedByUser(int userId);
+        Task<User?> Get(int id);
+
+        Task<List<User>> GetAll();
+
+        Task<User> Update(User model);
+
+        Task Delete(int id);
     }
 }
