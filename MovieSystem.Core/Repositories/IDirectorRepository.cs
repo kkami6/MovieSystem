@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Core.Repositories
 {
-    internal interface IDirectorRepository
+    public interface IDirectorRepository
     {
         Task<Director> Create(Director model);
 

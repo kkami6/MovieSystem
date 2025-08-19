@@ -14,11 +14,22 @@ namespace MovieSystem.Infrastructure.Configurations
         public void Configure(EntityTypeBuilder<MovieEntity> builder)
         {
             builder.ToTable("Movies");
+            
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.Title).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.Genre).IsRequired().HasMaxLength(50);
-            builder.Property(x => x.ReleaseDate).IsRequired();
+            
+            builder.Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+            
+            builder.Property(x => x.Title)
+                .IsRequired()
+                .HasMaxLength(100);
+            
+            builder.Property(x => x.Genre)
+                .IsRequired()
+                .HasMaxLength(50);
+            
+            builder.Property(x => x.ReleaseDate)
+                .IsRequired();
 
             builder.HasMany(x => x.Ratings)
                    .WithOne(r => r.Movie)

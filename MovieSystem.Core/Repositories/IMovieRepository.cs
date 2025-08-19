@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Core.Repositories
 {
-    internal interface IMovieRepository
+    public interface IMovieRepository
     {
         Task<Movie> Create(Movie model);
 
@@ -19,7 +19,6 @@ namespace MovieSystem.Core.Repositories
 
         Task Delete(int id);
 
-        // Complex queries
         Task<List<MovieRatingDetails>> GetRatedByUser(int userId);
 
         Task<List<MovieWithAverageRating>> GetByDirectorWithAverageRating(int directorId);

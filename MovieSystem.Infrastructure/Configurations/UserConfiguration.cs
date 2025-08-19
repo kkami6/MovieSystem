@@ -15,12 +15,26 @@ namespace MovieSystem.Infrastructure.Configurations
         public void Configure(EntityTypeBuilder<UserEntity> builder)
         {
             builder.ToTable("Users");
+            
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).ValueGeneratedOnAdd();
-            builder.Property(x => x.FirstName).IsRequired().HasMaxLength(50);
-            builder.Property(x => x.LastName).IsRequired().HasMaxLength(50);
-            builder.Property(x => x.Email).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.DateOfBirth).IsRequired();
+            
+            builder.Property(x => x.Id)
+                .ValueGeneratedOnAdd();
+            
+            builder.Property(x => x.FirstName)
+                .IsRequired()
+                .HasMaxLength(50);
+            
+            builder.Property(x => x.LastName)
+                .IsRequired()
+                .HasMaxLength(50);
+            
+            builder.Property(x => x.Email)
+                .IsRequired()
+                .HasMaxLength(100);
+            
+            builder.Property(x => x.DateOfBirth)
+                .IsRequired();
         }
     }
 }

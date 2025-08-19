@@ -19,12 +19,10 @@ namespace MovieSystem.Core.Models
 
         public int DirectorId { get; set; } = directorId;
 
-        // Navigation
         public Director? Director { get; set; }
 
         public List<Rating> Ratings { get; set; } = new List<Rating>();
 
-        // Convenience
         public double? AverageRating => Ratings.Count == 0 ? null : Ratings.Average(r => r.Score);
     }
 }

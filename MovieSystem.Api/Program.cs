@@ -1,4 +1,7 @@
 
+using MovieSystem.Core.Repositories;
+using MovieSystem.Infrastructure.Repositories;
+
 namespace MovieSystem.Api
 {
     public class Program
@@ -31,6 +34,11 @@ namespace MovieSystem.Api
             app.MapControllers();
 
             app.Run();
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
+            builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+            builder.Services.AddScoped<IRatingRepository, RatingRepository>();
         }
     }
 }

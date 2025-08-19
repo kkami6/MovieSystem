@@ -14,10 +14,8 @@ namespace MovieSystem.Core.Models
 
         public int MovieId { get; set; } = movieId;
 
-        // Valid range: 1–5 (validated later via FluentValidation)
         public int Score { get; set; } = score;
 
-        // Navigation
         public User? User { get; set; }
         public Movie? Movie { get; set; }
     }

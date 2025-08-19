@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MovieSystem.Infrastructure.Mappers;
 
 namespace MovieSystem.Infrastructure.Repositories
 {
@@ -29,16 +30,19 @@ namespace MovieSystem.Infrastructure.Repositories
         public async Task<List<User>> GetAll()
         {
             var entities = await context.Users.ToListAsync();
-            return entities.Select(e => e.ToDomainModel()).ToList();
+            return entities.ToDomainModelList();
         }
 
         public async Task<User> Update(User model)
         {
             var entity = await context.Users.SingleAsync(x => x.Id == model.Id);
-            entity.FirstName = model.FirstName;
-            entity.LastName = model.LastName;
-            entity.Email = model.Email;
-            entity.DateOfBirth = model.DateOfBirth;
+            var updated = model.ToEntity();
+
+            entity.FirstName = updated.FirstName;
+            entity.LastName = updated.LastName;
+            entity.Email = updated.Email;
+            entity.DateOfBirth = updated.DateOfBirth;
+
             await context.SaveChangesAsync();
             return entity.ToDomainModel();
         }

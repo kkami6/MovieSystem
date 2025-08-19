@@ -11,8 +11,11 @@ namespace MovieSystem.Infrastructure.Entities
     public class DirectorEntity(int id, string name, DateOnly? birthDate, string? nationality)
     {
         public int Id { get; set; } = id;
+        
         public string Name { get; set; } = name;
+        
         public DateOnly? BirthDate { get; set; } = birthDate;
+        
         public string? Nationality { get; set; } = nationality;
 
         public List<MovieEntity> Movies { get; set; } = new List<MovieEntity>();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Core.Repositories
 {
-    internal interface IRatingRepository
+    public interface IRatingRepository
     {
         Task<Rating> Create(Rating model);
 
