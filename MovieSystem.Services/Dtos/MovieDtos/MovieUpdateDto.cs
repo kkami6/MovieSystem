@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieSystem.Services.Interfaces
+namespace MovieSystem.Services.Dtos.MovieDtos
 {
-    internal interface IRatingValidator
+    public class MovieUpdateDto : MovieBaseDto
     {
+        public int Id { get; set; }
     }
 }

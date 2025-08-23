@@ -1,6 +1,9 @@
 
 using MovieSystem.Core.Repositories;
 using MovieSystem.Infrastructure.Repositories;
+using MovieSystem.Services.Interfaces;
+using MovieSystem.Services.Profiles;
+using MovieSystem.Services.Services;
 
 namespace MovieSystem.Api
 {
@@ -17,6 +20,21 @@ namespace MovieSystem.Api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
+            builder.Services.AddScoped<IMovieRepository, MovieRepository>();
+            builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+
+
+            // Add AutoMapper (scans the assembly where MappingProfile lives)
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IMovieService, MovieService>();
+            builder.Services.AddScoped<IDirectorService, DirectorService>();
+            builder.Services.AddScoped<IRatingService, RatingService>();
+
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,15 +48,9 @@ namespace MovieSystem.Api
 
             app.UseAuthorization();
 
-
             app.MapControllers();
 
-            app.Run();
-
-            builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
-            builder.Services.AddScoped<IMovieRepository, MovieRepository>();
-            builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+            app.Run();          
         }
     }
 }

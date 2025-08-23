@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieSystem.Services.Interfaces
+namespace MovieSystem.Services.Dtos.RatingDtos
 {
-    internal interface IMovieValidator
+    public class RatingGetDto: RatingBaseDto
     {
+        public int Id { get; set; }
     }
 }

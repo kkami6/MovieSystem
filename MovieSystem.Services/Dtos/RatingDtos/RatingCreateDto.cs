@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MovieSystem.Services.Interfaces
+namespace MovieSystem.Services.Dtos.RatingDtos
 {
-    internal interface IDirectorValidator
+    public class RatingCreateDto: RatingBaseDto
     {
+
     }
 }
