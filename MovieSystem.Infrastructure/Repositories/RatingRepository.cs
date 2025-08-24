@@ -11,8 +11,10 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Infrastructure.Repositories
 {
-    public class RatingRepository(MovieSystemContext context) : IRatingRepository
+    public class RatingRepository() : IRatingRepository
     {
+        private readonly MovieSystemContext context;
+
         public async Task<Rating> Create(Rating model)
         {
             var entity = model.ToEntity();

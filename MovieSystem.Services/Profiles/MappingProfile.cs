@@ -37,7 +37,7 @@ namespace MovieSystem.Services.Profiles
             CreateMap<RatingCreateDto, Rating>();
             CreateMap<RatingUpdateDto, Rating>();
 
-            // Extra models (wrappers with computed values)
+            // Mappings for extra models
             CreateMap<MovieWithAverageRating, MovieWithAverageRatingDto>();
             CreateMap<MovieRatingDetails, MovieRatingDetailsDto>();
         }

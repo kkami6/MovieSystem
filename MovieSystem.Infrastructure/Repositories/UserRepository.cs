@@ -11,8 +11,10 @@ using MovieSystem.Infrastructure.Mappers;
 
 namespace MovieSystem.Infrastructure.Repositories
 {
-    public class UserRepository(MovieSystemContext context) : IUserRepository
+    public class UserRepository() : IUserRepository
     {
+        private readonly MovieSystemContext context;
+
         public async Task<User> Create(User model)
         {
             var entity = model.ToEntity();

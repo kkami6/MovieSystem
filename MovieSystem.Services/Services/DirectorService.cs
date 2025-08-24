@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MovieSystem.Core.Models;
 using MovieSystem.Core.Repositories;
 using MovieSystem.Services.Dtos.DirectorDtos;
@@ -15,11 +16,19 @@ namespace MovieSystem.Services.Services
     {
         private readonly IDirectorRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IValidator<DirectorCreateDto> _createValidator;
+        private readonly IValidator<DirectorUpdateDto> _updateValidator;
 
-        public DirectorService(IDirectorRepository repository, IMapper mapper)
+        public DirectorService(
+            IDirectorRepository repository,
+            IMapper mapper,
+            IValidator<DirectorCreateDto> createValidator,
+            IValidator<DirectorUpdateDto> updateValidator)
         {
             _repository = repository;
             _mapper = mapper;
+            _createValidator = createValidator;
+            _updateValidator = updateValidator;
         }
 
         public async Task<List<DirectorGetDto>> GetAll()
@@ -36,6 +45,10 @@ namespace MovieSystem.Services.Services
 
         public async Task<DirectorGetDto> Create(DirectorCreateDto dto)
         {
+            var validation = await _createValidator.ValidateAsync(dto);
+            if (!validation.IsValid)
+                throw new FluentValidation.ValidationException(validation.Errors);
+
             var director = _mapper.Map<Director>(dto);
             var created = await _repository.Create(director);
             return _mapper.Map<DirectorGetDto>(created);
@@ -43,14 +56,15 @@ namespace MovieSystem.Services.Services
 
         public async Task<DirectorGetDto> Update(DirectorUpdateDto dto)
         {
+            var validation = await _updateValidator.ValidateAsync(dto);
+            if (!validation.IsValid)
+                throw new FluentValidation.ValidationException(validation.Errors);
+
             var director = _mapper.Map<Director>(dto);
             var updated = await _repository.Update(director);
             return _mapper.Map<DirectorGetDto>(updated);
         }
 
-        public async Task Delete(int id)
-        {
-            await _repository.Delete(id);
-        }
+        public async Task Delete(int id) => await _repository.Delete(id);
     }
 }

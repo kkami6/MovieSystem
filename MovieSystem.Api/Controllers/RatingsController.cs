@@ -19,20 +19,20 @@ namespace MovieSystem.Api.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var rating = await ratingService.GetById(id);
-            if (rating == null) return NotFound();
-            return Ok(rating);
+            return rating == null ? NotFound() : Ok(rating);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] RatingCreateDto dto)
         {
             var created = await ratingService.Create(dto);
-            return Ok(created);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] RatingUpdateDto dto)
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Update(int id, [FromBody] RatingUpdateDto dto)
         {
+            if (id != dto.Id) return BadRequest("Id mismatch.");
             var updated = await ratingService.Update(dto);
             return Ok(updated);
         }
@@ -41,10 +41,10 @@ namespace MovieSystem.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await ratingService.Delete(id);
-            return Ok();
+            return NoContent();
         }
 
-        // 🔹 Custom endpoints
+
         [HttpGet("user/{userId:int}")]
         public async Task<IActionResult> GetByUser(int userId)
         {

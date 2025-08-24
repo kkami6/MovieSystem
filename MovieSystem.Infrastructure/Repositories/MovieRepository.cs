@@ -11,8 +11,10 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Infrastructure.Repositories
 {
-    public class MovieRepository(MovieSystemContext context) : IMovieRepository
+    public class MovieRepository() : IMovieRepository
     {
+        private readonly MovieSystemContext context;
+
         public async Task<Movie> Create(Movie model)
         {
             var entity = model.ToEntity();

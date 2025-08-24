@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MovieSystem.Core.Models;
 using MovieSystem.Core.Repositories;
 using MovieSystem.Services.Dtos.RatingDtos;
@@ -15,11 +16,19 @@ namespace MovieSystem.Services.Services
     {
         private readonly IRatingRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IValidator<RatingCreateDto> _createValidator;
+        private readonly IValidator<RatingUpdateDto> _updateValidator;
 
-        public RatingService(IRatingRepository repository, IMapper mapper)
+        public RatingService(
+            IRatingRepository repository,
+            IMapper mapper,
+            IValidator<RatingCreateDto> createValidator,
+            IValidator<RatingUpdateDto> updateValidator)
         {
             _repository = repository;
             _mapper = mapper;
+            _createValidator = createValidator;
+            _updateValidator = updateValidator;
         }
 
         public async Task<List<RatingGetDto>> GetAll()
@@ -36,6 +45,10 @@ namespace MovieSystem.Services.Services
 
         public async Task<RatingGetDto> Create(RatingCreateDto dto)
         {
+            var validation = await _createValidator.ValidateAsync(dto);
+            if (!validation.IsValid)
+                throw new FluentValidation.ValidationException(validation.Errors);
+
             var rating = _mapper.Map<Rating>(dto);
             var created = await _repository.Create(rating);
             return _mapper.Map<RatingGetDto>(created);
@@ -43,15 +56,16 @@ namespace MovieSystem.Services.Services
 
         public async Task<RatingGetDto> Update(RatingUpdateDto dto)
         {
+            var validation = await _updateValidator.ValidateAsync(dto);
+            if (!validation.IsValid)
+                throw new FluentValidation.ValidationException(validation.Errors);
+
             var rating = _mapper.Map<Rating>(dto);
             var updated = await _repository.Update(rating);
             return _mapper.Map<RatingGetDto>(updated);
         }
 
-        public async Task Delete(int id)
-        {
-            await _repository.Delete(id);
-        }
+        public async Task Delete(int id) => await _repository.Delete(id);
 
         public async Task<List<RatingGetDto>> GetByUser(int userId)
         {

@@ -11,8 +11,10 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Infrastructure.Repositories
 {
-    public class DirectorRepository(MovieSystemContext context) : IDirectorRepository
+    public class DirectorRepository() : IDirectorRepository
     {
+        private readonly MovieSystemContext context;
+
         public async Task<Director> Create(Director model)
         {
             var entity = model.ToEntity();

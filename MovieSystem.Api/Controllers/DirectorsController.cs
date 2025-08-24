@@ -19,20 +19,20 @@ namespace MovieSystem.Api.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var director = await directorService.GetById(id);
-            if (director == null) return NotFound();
-            return Ok(director);
+            return director == null ? NotFound() : Ok(director);
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] DirectorCreateDto dto)
         {
             var created = await directorService.Create(dto);
-            return Ok(created);
+            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] DirectorUpdateDto dto)
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Update(int id, [FromBody] DirectorUpdateDto dto)
         {
+            if (id != dto.Id) return BadRequest("Id mismatch.");
             var updated = await directorService.Update(dto);
             return Ok(updated);
         }
@@ -41,7 +41,7 @@ namespace MovieSystem.Api.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await directorService.Delete(id);
-            return Ok();
+            return NoContent();
         }
     }
 }

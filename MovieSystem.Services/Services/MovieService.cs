@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FluentValidation;
 using MovieSystem.Core.Models;
 using MovieSystem.Core.Repositories;
 using MovieSystem.Services.Dtos.MovieDtos;
@@ -15,11 +16,19 @@ namespace MovieSystem.Services.Services
     {
         private readonly IMovieRepository _repository;
         private readonly IMapper _mapper;
+        private readonly IValidator<MovieCreateDto> _createValidator;
+        private readonly IValidator<MovieUpdateDto> _updateValidator;
 
-        public MovieService(IMovieRepository repository, IMapper mapper)
+        public MovieService(
+            IMovieRepository repository,
+            IMapper mapper,
+            IValidator<MovieCreateDto> createValidator,
+            IValidator<MovieUpdateDto> updateValidator)
         {
             _repository = repository;
             _mapper = mapper;
+            _createValidator = createValidator;
+            _updateValidator = updateValidator;
         }
 
         public async Task<List<MovieGetDto>> GetAll()
@@ -36,6 +45,10 @@ namespace MovieSystem.Services.Services
 
         public async Task<MovieGetDto> Create(MovieCreateDto dto)
         {
+            var validation = await _createValidator.ValidateAsync(dto);
+            if (!validation.IsValid)
+                throw new FluentValidation.ValidationException(validation.Errors);
+
             var movie = _mapper.Map<Movie>(dto);
             var created = await _repository.Create(movie);
             return _mapper.Map<MovieGetDto>(created);
@@ -43,17 +56,17 @@ namespace MovieSystem.Services.Services
 
         public async Task<MovieGetDto> Update(MovieUpdateDto dto)
         {
+            var validation = await _updateValidator.ValidateAsync(dto);
+            if (!validation.IsValid)
+                throw new FluentValidation.ValidationException(validation.Errors);
+
             var movie = _mapper.Map<Movie>(dto);
             var updated = await _repository.Update(movie);
             return _mapper.Map<MovieGetDto>(updated);
         }
 
-        public async Task Delete(int id)
-        {
-            await _repository.Delete(id);
-        }
+        public async Task Delete(int id) => await _repository.Delete(id);
 
-        // Extra queries
         public async Task<List<MovieRatingDetailsDto>> GetRatedByUser(int userId)
         {
             var results = await _repository.GetRatedByUser(userId);
