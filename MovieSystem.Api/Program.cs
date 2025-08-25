@@ -15,6 +15,8 @@ using MovieSystem.Services.Validators.RatingValidators;
 using MovieSystem.Services.Validators.UserValidators;
 using Microsoft.EntityFrameworkCore;
 using MovieSystem.Infrastructure.Entities;
+using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MovieSystem.Api
 {
@@ -24,9 +26,8 @@ namespace MovieSystem.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Services.AddDbContext<MovieSystemContext>(options => options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
-        new MySqlServerVersion(new Version(8, 0, 33))));
+            var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+            builder.Services.AddDbContext<MovieSystemContext>(options => options.UseMySql(connectionString,new MySqlServerVersion(new Version(8, 0, 33))));
 
             // Add services to the container.
 

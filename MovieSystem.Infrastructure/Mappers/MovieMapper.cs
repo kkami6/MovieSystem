@@ -9,13 +9,18 @@ namespace MovieSystem.Infrastructure.Mappers
 {
     public static class MovieMapper
     {
-        public static Movie ToDomainModel(this Entities.MovieEntity entity) => new(
-        entity.Id,
-        entity.Title,
-        entity.Genre,
-        entity.ReleaseDate,
-        entity.DirectorId
-    );
+        public static Movie ToDomainModel(this Entities.MovieEntity entity)
+        {
+            return new Movie
+            {
+                Id = entity.Id,
+                Title = entity.Title,
+                Genre = entity.Genre,
+                ReleaseYear = entity.ReleaseYear,
+                DirectorId = entity.DirectorId,
+            };
+        }
+
 
         public static List<Movie> ToDomainModelList(this IEnumerable<Entities.MovieEntity> entities)
             => entities.Select(ToDomainModel).ToList();
@@ -24,7 +29,7 @@ namespace MovieSystem.Infrastructure.Mappers
             domainModel.Id,
             domainModel.Title,
             domainModel.Genre,
-            domainModel.ReleaseDate,
+            domainModel.ReleaseYear,
             domainModel.DirectorId
         );
     }

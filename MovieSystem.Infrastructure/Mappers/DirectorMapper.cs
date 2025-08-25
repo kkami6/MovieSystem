@@ -9,12 +9,17 @@ namespace MovieSystem.Infrastructure.Mappers
 {
     public static class DirectorMapper
     {
-        public static Director ToDomainModel(this Entities.DirectorEntity entity) => new(
-        entity.Id,
-        entity.Name,
-        entity.BirthDate,
-        entity.Nationality
-    );
+      public static Director ToDomainModel(this Entities.DirectorEntity entity)
+        {
+            return new Director
+            {
+                BirthDate = entity.BirthDate,
+                Name = entity.Name,
+                Nationality = entity.Nationality,
+                Id = entity.Id
+            };
+        }
+
 
         public static List<Director> ToDomainModelList(this IEnumerable<Entities.DirectorEntity> entities)
             => entities.Select(ToDomainModel).ToList();

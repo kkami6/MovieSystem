@@ -8,13 +8,13 @@ using System.Xml.Linq;
 
 namespace MovieSystem.Infrastructure.Entities
 {
-    public class DirectorEntity(int id, string name, DateOnly? birthDate, string? nationality)
+    public class DirectorEntity(int id, string name, DateTime? birthDate, string? nationality)
     {
         public int Id { get; set; } = id;
         
         public string Name { get; set; } = name;
         
-        public DateOnly? BirthDate { get; set; } = birthDate;
+        public DateTime? BirthDate { get; set; } = birthDate;
         
         public string? Nationality { get; set; } = nationality;
 

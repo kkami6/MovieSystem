@@ -14,6 +14,7 @@ namespace MovieSystem.Services.Validators.MovieValidators
         {
             RuleFor(x => x.Id).GreaterThan(0);
             RuleFor(x => x.Title).NotEmpty().MaximumLength(100);
+            RuleFor(x => x.Genre).NotEmpty().MaximumLength(50);
             RuleFor(x => x.ReleaseYear).InclusiveBetween(1900, DateTime.Now.Year);
             RuleFor(x => x.DirectorId).GreaterThan(0);
         }

@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Core.Models
 {
-    public class Director(int id, string name, DateOnly? birthDate, string? nationality)
+    public class Director
     {
-        public int Id { get; set; } = id;
+        public int Id { get; set; }
 
-        public string Name { get; set; } = name;
+        public string Name { get; set; }
 
-        public DateOnly? BirthDate { get; set; } = birthDate;
+        public DateTime? BirthDate { get; set; }
 
-        public string? Nationality { get; set; } = nationality;
+        public string? Nationality { get; set; }
 
-        public List<Movie> Movies { get; set; } = new List<Movie>();
+        public List<Movie> Movies { get; set; }
     }
 }

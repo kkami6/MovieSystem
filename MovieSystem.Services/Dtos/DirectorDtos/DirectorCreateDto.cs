@@ -8,6 +8,6 @@ namespace MovieSystem.Services.Dtos.DirectorDtos
 {
     public class DirectorCreateDto: DirectorBaseDto
     {
-        public int Id { get; set; }
+        
     }
 }

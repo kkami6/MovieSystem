@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Core.Models
 {
-    public class Rating(int id, int userId, int movieId, int score)
+    public class Rating
     {
-        public int Id { get; set; } = id;
+        public int Id { get; set; }
 
-        public int UserId { get; set; } = userId;
+        public int UserId { get; set; }
 
-        public int MovieId { get; set; } = movieId;
+        public int MovieId { get; set; }
 
-        public int Score { get; set; } = score;
+        public int Score { get; set; }
 
         public User? User { get; set; }
         public Movie? Movie { get; set; }

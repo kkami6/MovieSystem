@@ -9,13 +9,24 @@ namespace MovieSystem.Infrastructure.Mappers
 {
     public static class UserMapper
     {
-        public static User ToDomainModel(this Entities.UserEntity entity) => new(
-        entity.Id,
-        entity.FirstName,
-        entity.LastName,
-        entity.Email,
-        entity.DateOfBirth
-    );
+        public static User ToDomainModel(this Entities.UserEntity entity)
+        {
+            return new User
+            {
+                Id = entity.Id,
+                FirstName = entity.FirstName,
+                LastName = entity.LastName,
+                Email = entity.Email,
+                DateOfBirth = entity.DateOfBirth,
+            };
+        }
+    //        => new(
+    //    entity.Id,
+    //    entity.FirstName,
+    //    entity.LastName,
+    //    entity.Email,
+    //    entity.DateOfBirth
+    //);
 
         public static List<User> ToDomainModelList(this IEnumerable<Entities.UserEntity> entities)
             => entities.Select(ToDomainModel).ToList();

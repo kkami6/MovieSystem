@@ -9,12 +9,17 @@ namespace MovieSystem.Infrastructure.Mappers
 {
     public static class RatingMapper
     {
-        public static Rating ToDomainModel(this Entities.RatingEntity entity) => new(
-        entity.Id,
-        entity.UserId,
-        entity.MovieId,
-        entity.Score
-    );
+        public static Rating ToDomainModel(this Entities.RatingEntity entity)
+        {
+            return new Rating
+            {
+                Id = entity.Id,
+                UserId = entity.UserId,
+                MovieId = entity.MovieId,
+                Score = entity.Score
+            };
+        }
+           
 
         public static List<Rating> ToDomainModelList(this IEnumerable<Entities.RatingEntity> entities)
             => entities.Select(ToDomainModel).ToList();

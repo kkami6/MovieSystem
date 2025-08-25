@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Core.Models
 {
-    public class Movie(int id, string title, string genre, DateTime releaseDate, int directorId)
+    public class Movie
     {
-        public int Id { get; set; } = id;
+        public int Id { get; set; }
 
-        public string Title { get; set; } = title;
+        public string Title { get; set; }
 
-        public string Genre { get; set; } = genre;
+        public string Genre { get; set; }
 
-        public DateTime ReleaseDate { get; set; } = releaseDate;
+        public int ReleaseYear { get; set; }
 
-        public int DirectorId { get; set; } = directorId;
+        public int DirectorId { get; set; }
 
         public Director? Director { get; set; }
 
-        public List<Rating> Ratings { get; set; } = new List<Rating>();
+        public List<Rating> Ratings { get; set; }
 
         public double? AverageRating => Ratings.Count == 0 ? null : Ratings.Average(r => r.Score);
     }

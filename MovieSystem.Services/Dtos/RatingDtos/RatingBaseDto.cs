@@ -12,6 +12,6 @@ namespace MovieSystem.Services.Dtos.RatingDtos
         
         public int MovieId { get; set; }
         
-        public int Value { get; set; }
+        public int Score { get; set; }
     }
 }

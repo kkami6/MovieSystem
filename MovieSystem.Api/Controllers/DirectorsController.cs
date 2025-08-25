@@ -29,10 +29,9 @@ namespace MovieSystem.Api.Controllers
             return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
         }
 
-        [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update(int id, [FromBody] DirectorUpdateDto dto)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] DirectorUpdateDto dto)
         {
-            if (id != dto.Id) return BadRequest("Id mismatch.");
             var updated = await directorService.Update(dto);
             return Ok(updated);
         }

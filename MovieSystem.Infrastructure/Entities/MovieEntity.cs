@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MovieSystem.Infrastructure.Entities
 {
-    public class MovieEntity(int id, string title, string genre, DateTime releaseDate, int directorId)
+    public class MovieEntity(int id, string title, string genre, int releaseYear, int directorId)
     {
         public int Id { get; set; } = id;
         
@@ -15,7 +15,7 @@ namespace MovieSystem.Infrastructure.Entities
         
         public string Genre { get; set; } = genre;
         
-        public DateTime ReleaseDate { get; set; } = releaseDate;
+        public int ReleaseYear { get; set; } = releaseYear;
         
         public int DirectorId { get; set; } = directorId;
 

@@ -4,15 +4,10 @@ using MovieSystem.Core.Models;
 using MovieSystem.Core.Repositories;
 using MovieSystem.Services.Dtos.DirectorDtos;
 using MovieSystem.Services.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MovieSystem.Services.Services
 {
-    public class DirectorService: IDirectorService
+    public class DirectorService : IDirectorService
     {
         private readonly IDirectorRepository _repository;
         private readonly IMapper _mapper;
@@ -48,6 +43,16 @@ namespace MovieSystem.Services.Services
             var validation = await _createValidator.ValidateAsync(dto);
             if (!validation.IsValid)
                 throw new FluentValidation.ValidationException(validation.Errors);
+
+            try
+            {
+                var res = _mapper.Map<Director>(dto);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
 
             var director = _mapper.Map<Director>(dto);
             var created = await _repository.Create(director);

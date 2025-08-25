@@ -27,17 +27,17 @@ namespace MovieSystem.Services.Profiles
             CreateMap<DirectorCreateDto, Director>();
             CreateMap<DirectorUpdateDto, Director>();
 
-            // Movie mappings
+            //// Movie mappings
             CreateMap<Movie, MovieGetDto>();
             CreateMap<MovieCreateDto, Movie>();
             CreateMap<MovieUpdateDto, Movie>();
 
-            // Rating mappings
+            //// Rating mappings
             CreateMap<Rating, RatingGetDto>();
             CreateMap<RatingCreateDto, Rating>();
             CreateMap<RatingUpdateDto, Rating>();
 
-            // Mappings for extra models
+            //// Mappings for extra models
             CreateMap<MovieWithAverageRating, MovieWithAverageRatingDto>();
             CreateMap<MovieRatingDetails, MovieRatingDetailsDto>();
         }

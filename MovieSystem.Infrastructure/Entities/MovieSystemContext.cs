@@ -11,8 +11,6 @@ namespace MovieSystem.Infrastructure.Entities
 {
     public class MovieSystemContext : DbContext
     {
-        public MovieSystemContext() { }
-
         public MovieSystemContext(DbContextOptions<MovieSystemContext> options) : base(options) { }
 
         public DbSet<UserEntity> Users { get; set; }

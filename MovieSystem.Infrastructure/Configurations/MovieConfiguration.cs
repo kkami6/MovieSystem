@@ -28,7 +28,7 @@ namespace MovieSystem.Infrastructure.Configurations
                 .IsRequired()
                 .HasMaxLength(50);
             
-            builder.Property(x => x.ReleaseDate)
+            builder.Property(x => x.ReleaseYear)
                 .IsRequired();
 
             builder.HasMany(x => x.Ratings)

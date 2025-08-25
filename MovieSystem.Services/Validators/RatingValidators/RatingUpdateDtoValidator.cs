@@ -15,7 +15,7 @@ namespace MovieSystem.Services.Validators.RatingValidators
             RuleFor(x => x.Id).GreaterThan(0);
             RuleFor(x => x.UserId).GreaterThan(0);
             RuleFor(x => x.MovieId).GreaterThan(0);
-            RuleFor(x => x.Value).InclusiveBetween(1, 10);
+            RuleFor(x => x.Score).InclusiveBetween(1, 10);
         }
     }
 }
